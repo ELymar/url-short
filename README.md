@@ -8,9 +8,9 @@
 0. Set up a mongo db instance 
 1. Set the following environment variables: 
 ```
-MONGO_CONNECTION_STRING=<your mongodb connection string>
-MONGO_DB_NAME=<your dbName e.g. "shortener">
-BASE_URL=<your base url e.g. "example.com" >
+MONGO_CONNECTION_STRING=<e.g. "mongodb://localhost:27017">
+MONGO_DB_NAME=<e.g. "shortener">
+BASE_URL=<e.g. "example.com">
 ```
 2. Run: 
 ```
