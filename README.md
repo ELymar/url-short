@@ -1,7 +1,7 @@
 # URL Shortener
 ## About
 - Generates short URL codes (3 chars) supporting up to 65535 codes. 
-- Persistance with mongodb 
+- Persistence with mongodb 
 
 
 ## How to use:
