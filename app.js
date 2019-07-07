@@ -1,4 +1,5 @@
 const express = require('express'); 
+const expressLayouts = require('express-ejs-layouts');
 const morgan = require('morgan');
 const app = express(); 
 const urlManager = require('./urlManager')();
@@ -6,9 +7,17 @@ const baseUrl = "localhost:3001"
 const mongoose = require('mongoose')
 const config = require('./config');
 
-
+// Logging
 app.use(morgan('combined'))
 
+// View engine setup
+app.use(expressLayouts);
+app.set('view engine', 'ejs');
+
+// URL Encoded 
+app.use(express.urlencoded({ extended: false }));
+
+//Database connection data
 const mongooseConnString = config["MONGO_CONNECTION_STRING"]; 
 const mongooseDbName = config["MONGO_DB_NAME"]
 
@@ -21,17 +30,17 @@ mongoose.connect(mongooseConnString + '/' + mongooseDbName, { useNewUrlParser: t
 console.log(mongooseConnString + "/" + mongooseDbName); 
 
 app.get('/', (req, res) => {
-  res.send("Hello, world!");
+  res.render("ShortUrl", {url:undefined});
 }); 
 
-app.post('/url/:url', async (req, res) => {
-  if(!req.params) res.status(400).send('{"error": "No URL"}')
-  console.log(req.params.url);
+app.post('/url', async (req, res) => {
+  if(!req.body) res.status(400).send('{"error": "No URL"}')
+  console.log(req.body);
   let code; 
   try {
-    code = await urlManager.setUrl(req.params.url)
+    code = await urlManager.setUrl(req.body.url)
     console.log(code)
-    res.send({url: `${baseUrl}/${code}`}); 
+    res.render("ShortUrl", {url: `${baseUrl}/${code}`}); 
   } catch (error) {
     console.log(error)
     res.status(500).send('{"error":"Could not generate shortcut"}');
