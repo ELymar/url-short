@@ -1,7 +1,7 @@
 <div class="row mt-5">
-    <div class="col-md-6 m-auto">
+    <div class="col-md-8 m-auto">
         <div class="card card-body">
-            <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i> URL Shortener </h1>
+            <h1 class="text-center mb-3"><i class="fas fa-cog"></i> URL Shortener </h1>
             <form action="/url" method="POST">
                 <div class="form-group">
                     <label for="text">URL</label>
@@ -12,7 +12,7 @@
             <% if(url != undefined) { %>
             <br />
             <div class="form-group">
-                <input type=text id="short-url" class=form-control readonly="readonly" value="<%= url %>"> </input>
+                <input type=url id="short-url" class=form-control readonly="readonly" value="<%= url %>"> </input>
             </div>
             <button onclick="copyLink()" class="btn btn-primary btn-block">Copy Link</button>
             <script>
